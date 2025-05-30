@@ -9,7 +9,6 @@ variable "location" {
 }
 
 
-
 variable "app_gateway_name" {
   type        = string
   description = "Name of the Application Gateway"
