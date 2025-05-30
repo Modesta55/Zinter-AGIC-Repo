@@ -19,7 +19,6 @@ resource "azurerm_virtual_network" "vnet" {
   address_space       = ["10.0.0.0/16"]
 }
 
-
 # Create subnet for App Gateway
 resource "azurerm_subnet" "appgw_subnet" {
   name                 = "appgw-subnet"
@@ -29,7 +28,6 @@ resource "azurerm_subnet" "appgw_subnet" {
 }
 
 # Create App Gateway
-
 resource "azurerm_application_gateway" "appgw" {
   name                = var.app_gateway_name
   resource_group_name = var.resource_group_name
@@ -60,7 +58,6 @@ resource "azurerm_application_gateway" "appgw" {
     name = "default-backend"
   }
 
-
   backend_http_settings {
     name                  = "default-settings"
     cookie_based_affinity = "Disabled"
@@ -82,5 +79,6 @@ resource "azurerm_application_gateway" "appgw" {
     http_listener_name         = "listener"
     backend_address_pool_name  = "default-backend"
     backend_http_settings_name = "default-settings"
+    priority                   = 100  # <-- Added priority attribute with a unique integer
   }
 }

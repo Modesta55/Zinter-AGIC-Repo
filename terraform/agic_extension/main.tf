@@ -2,7 +2,6 @@ provider "azurerm" {
   features {}
 }
 
-
 # Fetch AKS cluster
 data "azurerm_kubernetes_cluster" "aks" {
   name                = var.aks_cluster_name

@@ -1,24 +1,26 @@
 variable "aks_cluster_name" {
-  type        = string
   description = "Name of the AKS cluster"
+  type        = string
 }
 
 variable "resource_group_name" {
-  type        = string
   description = "Resource group where the AKS cluster resides"
+  type        = string
 }
 
 variable "app_gateway_name" {
-  type        = string
   description = "Name of the Azure Application Gateway"
+  type        = string
 }
 
 variable "app_gateway_rg" {
-  type        = string
   description = "Resource group where the Application Gateway is deployed"
+  type        = string
 }
 
 variable "subscription_id" {
-  type        = string
   description = "Azure Subscription ID"
+  type        = string
 }
+
+
