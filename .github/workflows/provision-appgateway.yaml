@@ -12,17 +12,15 @@ jobs:
       run:
         working-directory: ./terraform/app_gateway
 
-    env:
-      TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}  # 👈 This injects the Terraform Cloud API token
-
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Setup Terraform CLI
-        uses: hashicorp/setup-terraform@v2
+      - name: Setup Terraform 
+        uses: hashicorp/setup-terraform@v3
         with:
-          terraform_version: 1.5.7 # use your required version
+          terraform_version: 1.5.7  # Use your preferred version
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
       - name: Azure Login
         uses: azure/login@v1
