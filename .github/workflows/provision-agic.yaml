@@ -1,14 +1,16 @@
-name: "Provision App Gateway"
+name: "Provision AGIC"
 
 on:
-  workflow_dispatch:
+    push:
+      branches: [main]
+    workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./terraform/app_gateway
+        working-directory: ./terraform/agic_extension
 
     env:
       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}  # Required for Terraform Cloud

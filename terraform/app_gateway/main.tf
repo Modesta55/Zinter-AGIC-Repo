@@ -11,7 +11,6 @@ resource "azurerm_public_ip" "appgw_ip" {
   sku                 = "Standard"
 }
 
-
 # Create virtual network
 resource "azurerm_virtual_network" "vnet" {
   name                = "appgw-vnet"
@@ -19,6 +18,7 @@ resource "azurerm_virtual_network" "vnet" {
   location            = var.location
   address_space       = ["10.0.0.0/16"]
 }
+
 
 # Create subnet for App Gateway
 resource "azurerm_subnet" "appgw_subnet" {
@@ -29,6 +29,7 @@ resource "azurerm_subnet" "appgw_subnet" {
 }
 
 # Create App Gateway
+
 resource "azurerm_application_gateway" "appgw" {
   name                = var.app_gateway_name
   resource_group_name = var.resource_group_name
@@ -58,6 +59,7 @@ resource "azurerm_application_gateway" "appgw" {
   backend_address_pool {
     name = "default-backend"
   }
+
 
   backend_http_settings {
     name                  = "default-settings"
