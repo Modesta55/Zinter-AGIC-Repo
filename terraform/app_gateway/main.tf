@@ -27,7 +27,7 @@ resource "azurerm_subnet" "appgw_subnet" {
   address_prefixes     = ["10.0.1.0/27"]
 }
 
-# Create App Gateway
+# ✅ FIXED: Create App Gateway with WAF configuration
 resource "azurerm_application_gateway" "appgw" {
   name                = var.app_gateway_name
   resource_group_name = var.resource_group_name
@@ -73,12 +73,20 @@ resource "azurerm_application_gateway" "appgw" {
     protocol                       = "Http"
   }
 
+
   request_routing_rule {
     name                       = "rule1"
     rule_type                  = "Basic"
     http_listener_name         = "listener"
     backend_address_pool_name  = "default-backend"
     backend_http_settings_name = "default-settings"
-    priority                   = 100  # <-- Added priority attribute with a unique integer
+    priority                   = 100
+  }
+  # ✅ Required for WAF_v2 SKU
+  waf_configuration {
+    enabled          = true
+    firewall_mode    = "Prevention" # or "Detection"
+    rule_set_type    = "OWASP"
+    rule_set_version = "3.2"
   }
 }
